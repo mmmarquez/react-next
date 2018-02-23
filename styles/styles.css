@@ -1,0 +1,34 @@
+@tailwind preflight;
+@tailwind utilities;
+
+/* GLOBAL */
+
+#__next {
+	margin-top: 4rem;
+}
+
+/* MARKDOWN STYLES */
+h1 {
+	@apply .text-green;
+}
+h2 {
+}
+h3 {
+}
+p {
+}
+ul,
+ol {
+}
+
+ul li,
+ol li {
+}
+
+a {
+	@apply .text-red .no-underline;
+}
+
+a:hover {
+	@apply .text-blue;
+}
