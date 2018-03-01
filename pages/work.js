@@ -1,23 +1,34 @@
-import 'isomorphic-fetch';
-import Card from '../components/Card.js';
-import stylesheet from '../styles/styles.css';
-import { createClient } from '../plugins/contentful.js';
+import "isomorphic-fetch";
+import Card from "../components/Card.js";
+import { createClient } from "../plugins/contentful.js";
 const client = createClient();
-import Head from 'next/head';
+import Head from "next/head";
+
+// <meta
+// 	property="keywords"
+// 	content={
+// 		work.fields.seoKeywords.join(", ")
+// 			? work.fields.seoKeywords.join(", ")
+// 			: "lol"
+// 	}
+// 	key="keywords"
+// />
 
 const Work = ({ work }) => (
 	<div>
 		<Head>
-			<title>{`${work.fields.seoTitle} | A A`}</title>
+			<title>
+				{`${work.fields.seoTitle} | A A`
+					? `${work.fields.seoTitle} | A A`
+					: "Amanda Agricola"}
+			</title>
+
 			<meta
 				property="description"
-				content={work.fields.seoDescription}
+				content={
+					work.fields.seoDescription ? work.fields.seoDescription : "lol"
+				}
 				key="description"
-			/>
-			<meta
-				property="keywords"
-				content={work.fields.seoKeywords.join(', ')}
-				key="keywords"
 			/>
 			<meta
 				name="viewport"
@@ -25,38 +36,38 @@ const Work = ({ work }) => (
 				key="viewport"
 			/>
 		</Head>
-		<Card
-			className="bg-green border"
-			key={work.sys.id}
-			title={work.fields.title}
-			content={work.fields.content}
-			slug={work.fields.slug}
-		/>
+
+		<div className="container max-w-xxl mx-auto py-4 px-6 lg:px-0">
+			<Card
+				className=""
+				key={work.sys.id}
+				title={work.fields.title}
+				content={work.fields.content}
+				slug={work.fields.slug}
+				videos={work.fields.videos}
+				images={work.fields.images}
+			/>
+		</div>
 	</div>
 );
 
 Work.getInitialProps = async ({ query: { slug } }) => {
-	// `env` is available in the context object
 	return Promise.all([
-		// fetch the owner of the blog
 		client.getEntries({
 			content_type: process.env.CTF_BLOG_POST_TYPE_ID,
-			'fields.slug': slug
+			"fields.slug": slug
 		})
 	])
 		.then(([work]) => {
-			// return data that should be available
-			// in the template
-			console.log(work.items[0].fields.seoKeywords.join(' '));
 			return {
-				work: work.items[0],
-				seo_keywords: work.items[0].fields.seoKeywords.join(' ')
+				work: work.items[0]
 			};
 		})
 		.catch(console.error);
+};
 
-	// const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-	// const data = await response.json();
+Work.componentDidMount = () => {
+	console.log("did it?");
 };
 
 export default Work;

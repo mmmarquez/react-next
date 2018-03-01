@@ -9,7 +9,7 @@
 
 /* MARKDOWN STYLES */
 h1 {
-	@apply .text-green;
+	/* @apply .text-green; */
 }
 h2 {
 }
@@ -26,9 +26,9 @@ ol li {
 }
 
 a {
-	@apply .text-red .no-underline;
+	@apply .text-black .no-underline;
 }
 
 a:hover {
-	@apply .text-blue;
+	@apply .text-red;
 }
