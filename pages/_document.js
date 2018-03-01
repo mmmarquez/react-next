@@ -12,7 +12,6 @@ export default class MyDocument extends Document {
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/zooming/1.4.1/zooming.min.js" />
 				</Head>
 				<body className="__body">
-					<Navigation />
 					<Main />
 					<NextScript />
 				</body>

@@ -24,10 +24,13 @@ const Index = ({ entries }) => (
 				key="viewport"
 			/>
 		</Head>
-		<div>
-			{entries.map(x => (
-				<WorkLink key={x.sys.id} title={x.fields.title} slug={x.fields.slug} />
-			))}
+		<div id="container">
+			{
+				entries.map(x => (
+					
+				<WorkLink className="field" key={x.sys.id} title={x.fields.title} slug={x.fields.slug} />
+			))
+			}
 		</div>
 	</div>
 );
@@ -48,3 +51,4 @@ Index.getInitialProps = async () => {
 };
 
 export default Index;
+
